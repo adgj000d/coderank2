@@ -10,6 +10,8 @@ urlpatterns = [
     path('register/', views.registerPage, name='register'),
     path('', views.home, name='home'),
     path('problems/<str:pk>/', views.problemPage, name='problemPage'),
+    path('createProblem/', views.createProblem, name='createProblem'),
+    path('createTestCase/<str:pk>/', views.createTestCase, name='createTestCase'),
     path('leaderboard/', views.leaderboard, name='leaderboard'),
     path('code/<str:pk>/', views.codePage, name='codePage'),
 ]

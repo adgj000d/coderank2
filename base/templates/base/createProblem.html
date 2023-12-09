@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .problem-form {
+        padding: 2rem 4rem;
+    }
+
+    .problem-form .form-control {
+        margin: 10px 0;
+    }
+
+    .problem_desc {
+        height: 300px;
+    }
+
+    .submit-btn {
+        background-color: #1B262C;
+        border-color: #1B262C;
+        width: 7rem;
+    }
+
+    .submit-btn:hover {
+        background-color: #3282B8;
+        border-color: #3282B8;
+    }
+</style>
+
+<div class="problem-form">
+
+    <form method="POST" action="">
+        {% csrf_token %}
+    
+        <div class="form-group">
+            <input name="problem_name" placeholder="Problem Name" type="text" class="form-control" required>
+        </div>
+    
+        <div class="row">
+            <div class="col">
+                <input name="topic_tags" type="text" class="form-control" placeholder="Topic Tags">
+            </div>
+    
+            <div class="col">
+                <select name="difficulty" class="form-control custom-select mr-sm-2" id="inlineFormCustomSelect" required>
+                    <option value="" hidden>Choose Difficulty</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+            </div>
+        </div>
+    
+        <div class="form-group">
+            <textarea name="problem_desc" placeholder="Problem Description" type="text" class="problem_desc form-control" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn btn btn-primary my-1">Submit</button>
+    </form>
+</div>
+
+{% endblock content %}

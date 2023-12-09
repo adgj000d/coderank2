@@ -1,0 +1,60 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<style>
+    .test-cases {
+        padding: 2rem 4rem;
+    }
+
+    .test-cases .form-control {
+        margin: 10px 0;
+    }
+
+    .textcase-field {
+        height: 100px;
+    }
+
+    .submit-btn {
+        background-color: #1B262C;
+        border-color: #1B262C;
+        width: 7rem;
+    }
+
+    .submit-btn:hover {
+        background-color: #3282B8;
+        border-color: #3282B8;
+    }
+</style>
+
+<div class="test-cases">
+
+    {% for message in messages %}
+    
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+    {% endfor %}
+
+    <h5>Enter the Test-Cases for the problem</h5>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col">
+                <textarea name="input" type="text" class="textcase-field form-control" placeholder="Enter Input" required></textarea>
+            </div>
+
+            <div class="col">
+                <textarea name="output" type="text" class="textcase-field form-control" placeholder="Enter Output" required></textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn btn btn-primary my-1">Submit</button>
+    </form>
+</div>
+
+{% endblock content %}

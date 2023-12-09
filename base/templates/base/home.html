@@ -152,13 +152,15 @@
         
     {% endfor %}
 
-    <div class="container-fluid home1">
-        <div class="head">
-    
-            <h4>Hola {{user}} </h4>
-            
+    {% if request.user.is_authenticated %}
+        <div class="container-fluid home1">
+            <div class="head">
+        
+                <h4>Hola {{user}} </h4>
+                
+            </div>
         </div>
-    </div>
+    {% endif %}
     
     <div class="diff-btns">
         <a href="/?q=Easy" class="diff-btn easy">Easy</a>
@@ -197,6 +199,38 @@
         </div>
     
     </div>
+
+
+    {% if request.user.is_authenticated %}
+    <div>
+        <a href="{% url 'createProblem' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                <style>
+                    svg {
+                        background-color: #0F4C75;
+                        fill: #FFF;
+                        margin: 1rem;
+                        padding: 0.5rem;
+                        width: 3.5rem;
+                        height: 3.5rem;
+                        border-radius: 100%;
+    
+                        position: fixed;
+                        bottom: 1rem;
+                        right: 1rem;
+                    }
+
+                    svg:hover {
+                        transition: .4s;
+                        transform: rotate(0.5turn);
+                        background-color: #1B262C;
+                    }
+                </style>
+                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+            </svg>
+        </a>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock content %}

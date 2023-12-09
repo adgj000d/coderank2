@@ -98,6 +98,13 @@
                 style="background-color: #fff; cursor: not-allowed;" disabled/>
             {% endif %}
         </form>
+        
+        {% if request.user.is_authenticated %}
+        <br>
+        <hr>
+
+        <p>Contribute test-cases to this problem: <a href="{% url 'createTestCase' problem.id %}">Click Here</a></p>
+        {% endif %}
 
     </div>
 

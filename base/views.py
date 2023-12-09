@@ -23,15 +23,19 @@ def loginPage(request):
         return redirect('home')
     
     if request.method == 'POST':
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
 
+        test_user = None
         try:
-            user = User.objects.get(username = username)
+            test_user = User.objects.get(email = email)
         except:
             messages.error(request, 'Username does not exist')
         
-        user = authenticate(request, username=username, password=password)
+        user = None
+        if test_user is not None:
+            username = test_user.username
+            user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
@@ -148,6 +152,34 @@ def problemPage(request, pk):
         return render(request, 'base/solution.html', context)
         
     return render(request, 'base/problem-page.html', context)
+
+def createProblem(request):    
+    if request.method == 'POST':
+        problem = Problem.objects.create(
+            name = request.POST.get('problem_name'),
+            desc = request.POST.get('problem_desc'),
+            topic_tag = request.POST.get('topic_tags'),
+            difficulty = request.POST.get('difficulty')
+        )
+
+        messages.info(request, 'Congretulations, Your problem is now part of CodeRank 🪄')
+        return redirect(home)
+    
+    return render(request, 'base/createProblem.html')
+
+def createTestCase(request, pk):
+    if request.method == 'POST':
+        problem = Problem.objects.get(id=pk)
+
+        testCase = TestCases.objects.create(
+            problem = problem,
+            input = request.POST.get('input'),
+            output = request.POST.get('output')
+        )
+
+        messages.info(request, 'Your TestCase is added to the problem')
+
+    return render(request, 'base/createTestCase.html')
 
 def leaderboard(request):
     submissions = Solution.objects.all()
