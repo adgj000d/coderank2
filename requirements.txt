@@ -10,3 +10,4 @@ dnspython
 gunicorn
 whitenoise==6.2.0
 Brotli==1.0.9
+pytz
